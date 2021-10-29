@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import RetailerInfo, Shop
-from .serializer import RetailerInfoSerializer, ShopSerializer
+from .models import RetailerInfo
+from .serializer import RetailerInfoSerializer
 
 # Create your views here.
 
@@ -9,8 +9,3 @@ from .serializer import RetailerInfoSerializer, ShopSerializer
 class RetailerInfoViewSet(viewsets.ModelViewSet):
     queryset = RetailerInfo.objects.all().order_by('-registration_date')
     serializer_class = RetailerInfoSerializer
-
-
-class ShopViewSet(viewsets.ModelViewSet):
-    queryset = Shop.objects.all()
-    serializer_class = ShopSerializer

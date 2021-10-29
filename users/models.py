@@ -14,9 +14,3 @@ class RetailerInfo(models.Model):
     second_contact_phone_number = models.CharField(max_length=25, blank=True)
     registration_date = models.DateTimeField(auto_now_add=True)
     last_login_date = models.DateTimeField(auto_now=True)
-
-
-class Shop(models.Model):
-    retailer_id = models.ForeignKey(RetailerInfo, on_delete=models.CASCADE)
-    location = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='authentication/shop/')
