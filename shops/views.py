@@ -11,5 +11,5 @@ class ShopViewSet(viewsets.ModelViewSet):
 
 
 class ShopProductViewSet(viewsets.ModelViewSet):
-    query = ShopProduct.objects.all()
-    serialiser_class = ShopProductSerializer
+    queryset = ShopProduct.objects.all()
+    serializer_class = ShopProductSerializer

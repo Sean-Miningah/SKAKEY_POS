@@ -14,7 +14,7 @@ class ShopProduct(models.Model):
     shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
     p_name = models.CharField(max_length=50, blank=False)
     quantity = models.FloatField(editable=True)
-    price = models.BigIntegerField(editalbe=True)
+    price = models.BigIntegerField(editable=True)
     defination = models.TextField(max_length=250, blank=False)
     category = models.CharField(max_length=50, blank=False)
     source = models.CharField(max_length=50, blank=False)
