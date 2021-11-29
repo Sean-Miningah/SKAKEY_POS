@@ -6,23 +6,24 @@ services:
       - .:/skakey
     ports:
       - 8000:8000
-    container_name: skakey
+    image: skakey-django-api
+    container_name: skakey-web
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     depends_on:
-      - db
+      - postgres_db
     networks:
       app_net:
         ipv4_address: 192.168.0.4
-  db:
+  postgres_db:
     image: postgres
     volumes:
       - ./data/db:/var/lib/postresql/data
     restart: always
     environment:
-      - POSTGRES_DB=SKAKEY_POS
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    container_name: postgres_db
+      - POSTGRES_DB=skakey
+      - POSTGRES_USER=superuserskakey
+      - POSTGRES_PASSWORD=truth_db@2021
+    container_name: skakey_db
     ports:
       - "5432:5432"
     networks:
@@ -30,12 +31,11 @@ services:
         ipv4_address: 192.168.0.2
 
   pgadmin:
-    container_name: pgadmin4
+    container_name: skakey_pgadmin4
     image: dpage/pgadmin4
     restart: always
     volumes:
       - ./data/pgadmin-data:/var/lib/pgadmin
-
     environment:
       PGADMIN_DEFAULT_EMAIL: root@root.com
       PGADMIN_DEFAULT_PASSWORD: root

@@ -1,8 +1,5 @@
+import os
 from pathlib import Path
-import environ 
-
-env = environ.Env()
-envrion.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,12 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =env("SECRET_KEY")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == "1" # 1 == True
 
-ALLOWED_HOSTS = [env("ALLOWED_HOST", default="*")]
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
+
 
 
 # Application definition
@@ -69,18 +67,31 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# POSTGRES_DB = os.environ.get("POSTGRES_DB") # database name
+# POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD") # user password
+# POSTGRES_USER = os.environ.get("POSTGRES_USER") # username
+# POSTGRES_HOST = os.environ.get("POSTGRES_HOST") # database host
+# POSTGRES_PORT = os.environ.get("POSTGRES_PORT") # database port 
+ 
+# POSTGRES_READY = (
+#     POSTGRES_DB is not None
+#     and POSTGRES_PASSWORD is not None 
+#     and POSTGRES_USER is not None 
+#     and POSTGRES_HOST is not None 
+#     and POSTGRES_HOST is not None
+# )
+
+# if POSTGRES_READY:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DATABASE_NAME'),
-        'USER':env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST':env('DATABASE_HOST'),
-        'PORT': env("'DATABASE_PORT"),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
