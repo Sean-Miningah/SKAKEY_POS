@@ -4,8 +4,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'create-shops', views.ShopViewSet)
-router.register(r'add_category', views.ShopCartViewSet)
-router.register(r'category', views.ShopCartViewSet)
+router.register(r'add_category', views.ProductCategoryViewSet)
+router.register(r'cart', views.ShopCartViewSet)
 router.register(r'add-products', views.ShopProductViewSet)
 
 urlpatterns = [

@@ -1,33 +1,36 @@
 from django.db import models
-from users.models import RetailerInfo
 
 # Create your models here.
 
 
 class Shop(models.Model):
-    retailer_id = models.ForeignKey(RetailerInfo, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=20, blank=False)
+    last_name = models.CharField(max_length=20, blank=False)
+    shopname = models.CharField(max_length=20, blank=False)
     location = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='user/shop/')
+    phonenumber = models.CharField(max_length=15)
+    photo = models.ImageField(upload_to='user/shop/')
+    category = models.CharField(max_length=20, blank=False)
 
 
 class ShopProduct(models.Model):
-    shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    p_name = models.CharField(max_length=50, blank=False)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, blank=False)
     quantity = models.FloatField(editable=True)
     price = models.BigIntegerField(editable=True)
     defination = models.TextField(max_length=250, blank=False)
     category = models.CharField(max_length=50, blank=False)
-    source = models.CharField(max_length=50, blank=False)
+    source = models.CharField(max_length=50, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     photo = models.ImageField(upload_to='Shop/ShopProduct/', blank=False)
     barcode = models.CharField(max_length=150, blank=True)
 
 
-class ShopCategory(models.Model):
-    shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    category_name = models.CharField(max_length=50, blank=False)
-    category_description = models.CharField(max_length=100, blank=False)
+class ProductCategory(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, blank=False)
+    description = models.CharField(max_length=100, blank=False)
     last_update = models.DateTimeField(auto_now=True)
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Shop, ShopProduct, ShopCart, ShopCategory
+from .models import Shop, ShopProduct, ShopCart, ProductCategory
 
 
 class ShopSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,7 +20,7 @@ class ShopCartSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class ShopCategorySerializer(serializers.HyperlinkedModelSerializer):
+class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = ShopCategory
+        model = ProductCategory
         fields = '__all__'

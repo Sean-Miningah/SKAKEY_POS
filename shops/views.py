@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Shop, ShopProduct, ShopCategory, ShopCart
-from .serializer import ShopSerializer, ShopProductSerializer, ShopCartSerializer, ShopCategorySerializer
+from .models import Shop, ShopProduct, ProductCategory, ShopCart
+from .serializer import ShopSerializer, ShopProductSerializer, ShopCartSerializer, ProductCategorySerializer
 
 # Create your views here.
 
@@ -20,6 +20,6 @@ class ShopCartViewSet(viewsets.ModelViewSet):
     serializer_class = ShopCartSerializer
 
 
-class ShopCategoryViewSet(viewsets.ModelViewSet):
-    queryset = ShopCategory.objects.all()
-    serailizer_class = ShopCategorySerializer
+class ProductCategoryViewSet(viewsets.ModelViewSet):
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
