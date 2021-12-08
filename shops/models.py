@@ -1,13 +1,16 @@
 from django.db import models
-from users.models import RetailerInfo
 
 # Create your models here.
 
 
 class Shop(models.Model):
-    retailer_id = models.ForeignKey(RetailerInfo, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=15)
+    last_name = models.CharField(max_length=15)
     location = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='user/shop/')
+    phone_number = models.CharField(max_length=20)
+    shop_name = models.CharField(max_length=15)
+    shop_type = models.CharField(max_length=15)
 
 
 class ShopProduct(models.Model):
