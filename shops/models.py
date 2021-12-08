@@ -20,7 +20,30 @@ class ShopProduct(models.Model):
     source = models.CharField(max_length=50, blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
-    image_1 = models.ImageField(upload_to='user/ShopProduct/', blank=False)
-    image_2 = models.ImageField(upload_to='user/ShopProduct/', blank=True)
-    image_3 = models.ImageField(upload_to='user/ShopProduct/', blank=True)
-    image_4 = models.ImageField(upload_to='user/ShopProduct/', blank=True)
+    photo = models.ImageField(upload_to='Shop/ShopProduct/', blank=False)
+    barcode = models.CharField(max_length=150, blank=True)
+
+
+class ShopCategory(models.Model):
+    shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    category_name = models.CharField(max_length=50, blank=False)
+    category_description = models.CharField(max_length=100, blank=False)
+    last_update = models.DateTimeField(auto_now=True)
+
+
+class ShopCart(models.Model):
+    MPESA = 'MPESA'
+    CASH = 'CASH'
+    CARD = 'SHOP-CARD'
+
+    PAYMENT_CHOICES = [
+        (MPESA, 'm-pesa'),
+        (CASH, 'cash'),
+        (CARD, 'shop-card')
+    ]
+    total_price = models.BigIntegerField(default=0, editable=False,)
+    cart_products = models.ForeignKey(ShopProduct, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    last_update = models.DateTimeField(auto_now=True)
+    mode_of_payment = models.CharField(max_length=10,
+                                       choices=PAYMENT_CHOICES, blank=True)
