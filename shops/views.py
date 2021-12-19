@@ -6,8 +6,8 @@ from .serializer import ShopSerializer, ShopProductSerializer, ShopCartSerialize
 
 
 class ShopViewSet(viewsets.ModelViewSet):
-    queryset = Shop.objects.all()
     serializer_class = ShopSerializer
+    queryset = Shop.objects.all()
 
 
 class ShopProductViewSet(viewsets.ModelViewSet):
